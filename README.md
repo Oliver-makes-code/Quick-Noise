@@ -1,6 +1,6 @@
 # Quick-Noise
 
-High performance work work in progress batched processing noise library. Made in Rust.
+WIP High performance batched processing noise library. Made in Rust.
 
 # Disclaimer
 
