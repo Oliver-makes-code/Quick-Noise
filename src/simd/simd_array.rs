@@ -57,7 +57,7 @@ macro_rules! impl_simd_array_op {
     }
 }
 
-#[repr(align(32))]
+#[repr(align(64))]
 #[derive(Copy)]
 pub struct SimdArray<T: SimdInfo, const N: usize> {
     pub data: [MaybeUninit<T>; N],

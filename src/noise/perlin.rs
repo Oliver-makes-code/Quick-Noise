@@ -393,13 +393,13 @@ impl Perlin {
 
         let mut cur_octave = Octave2D::splat(scale, 1.0);
         
-        self.single_octave_2d::<true>(&mut result, pos, cur_octave, weight_coef, channel_seed, octave_offset);
+        self.single_octave_2d::<true>(&mut result, pos, &cur_octave, weight_coef, channel_seed, octave_offset);
 
         for _ in 1..octaves {
             cur_octave.scale /= lacunarity;
             cur_octave.weight *= persistence;
 
-            self.single_octave_2d::<false>(&mut result, pos, cur_octave, weight_coef, channel_seed, octave_offset);
+            self.single_octave_2d::<false>(&mut result, pos, &cur_octave, weight_coef, channel_seed, octave_offset);
         }
 
         result
@@ -423,9 +423,9 @@ impl Perlin {
         }
         let weight_coef = amplitude / weight_sum;
 
-        self.single_octave_2d::<true>(&mut result, pos, octaves_vec[0], weight_coef, channel_seed, octave_offset);
+        self.single_octave_2d::<true>(&mut result, pos, &octaves_vec[0], weight_coef, channel_seed, octave_offset);
         for i in 1..octaves_vec.len() {
-            self.single_octave_2d::<false>(&mut result, pos, octaves_vec[i], weight_coef, channel_seed, octave_offset);
+            self.single_octave_2d::<false>(&mut result, pos, &octaves_vec[i], weight_coef, channel_seed, octave_offset);
         }
 
         result
@@ -435,7 +435,7 @@ impl Perlin {
         &mut self,
         result: &mut PerlinMap,
         pos: Vec2<i32>,
-        octave: Octave2D,
+        octave: &Octave2D,
         weight_coef: f32,
         channel_seed: u64,
         octave_offset: f32,
